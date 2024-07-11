@@ -67,3 +67,7 @@
       @apply bg-background text-foreground;
     }
   }
+
+  *{
+    /* outline: solid 1px red; */
+  }
