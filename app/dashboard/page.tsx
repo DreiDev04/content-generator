@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
 import TemplateList from "./(components)/TemplateList";
 import { Search } from "lucide-react";
 
@@ -28,7 +27,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className=" p-10 bg-card">
+      <section className="p-10 bg-card">
         <TemplateList search={search} />
       </section>
     </main>

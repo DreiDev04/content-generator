@@ -39,7 +39,6 @@ const SideNav = () => {
           alt="logo"
           width={150}
           height={150}
-          className=""
         />
       </div>
       <div className="flex flex-col gap-4 mt-10">
