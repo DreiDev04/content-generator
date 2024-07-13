@@ -10,17 +10,22 @@ const OutputSection = () => {
     editorProps: {
       attributes: {
         class:
-          "bg-background p-4 rounded-md shadow-sm focus:shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none h-full border ",
+          "bg-background p-4 rounded-md shadow-sm focus:shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none h-full border shadow-lg",
       },
     },
   });
 
   return (
-    <div className=' h-full w-full '>
-      
-      <EditorContent editor={editor} className="h-full w-full" />
+    <div className="h-full w-full">
+      <EditorContent
+        editor={editor}
+        className="h-full w-full"
+        onChange={() => {
+          console.log(editor?.getHTML());
+        }}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default OutputSection;

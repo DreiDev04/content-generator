@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { FormContext } from "@/components/context/FormContext";
+import { chatSession } from "@/utils/aimodel";
 
 interface GenerateFormsProps {
   selectedTemplate: TEMPLATE;
@@ -23,12 +24,14 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
     throw new Error("GenerateForms must be used within a FormProvider");
   }
 
-  const { formData, setFormData } = context;
+  const { formData, setFormData, setIsLoading, isLoading } = context;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormData(dataForm);
-    console.log("Form submitted: ", dataForm);
+    // setFormData(dataForm);
+    // console.log("Form submitted: ", dataForm);
+
+    GenerateAIContent(dataForm);
   };
 
   const handleOnChange = (
@@ -41,8 +44,24 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
     }));
   };
 
-  const GenerateAIContent = () => {
+  const GenerateAIContent = async (datas: FORMDATA | undefined) => {
+    // const extractedData: { key: string; value: any; }[] = [];
+    // if (datas) {
+    //   Object.entries(datas).forEach(([key, value]) => {
+    //     console.log(`${key}: ${value}`);
+    //     extractedData.push({ key, value });
+    //   });
+    // } else {
+    //   console.log('No data provided');
+    // }
+    // console.log("Extracted: ",extractedData);
+    setIsLoading(true);
+    const Prompt  = selectedTemplate.aiPrompt + "\n\n" + JSON.stringify(datas);
     
+    const result = await chatSession.sendMessage(Prompt);
+    console.log("Result: ", result.response.text());
+    setFormData(result.response.text());
+    setIsLoading(false);
   };
 
   return (
@@ -72,7 +91,7 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
           ) : null}
         </div>
       ))}
-      <Button type="submit" className="w-full">
+      <Button type="submit" className="w-full" disabled={!!isLoading}>
         Generate
       </Button>
     </form>
