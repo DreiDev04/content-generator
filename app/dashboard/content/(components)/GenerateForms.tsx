@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TEMPLATE } from "@/app/(data)/TemplateListData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 import { FormContext } from "@/components/context/FormContext";
 import { chatSession } from "@/utils/aimodel";
+import { db } from "@/utils/db";
+import { AIOutput } from "@/utils/schema";
+import { useUser } from "@clerk/nextjs";
 
 interface GenerateFormsProps {
   selectedTemplate: TEMPLATE;
@@ -16,21 +18,20 @@ interface GenerateFormsProps {
 export interface FORMDATA {
   name: string;
 }
+
 const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
   const [dataForm, setDataForm] = useState<FORMDATA>();
   const context = useContext(FormContext);
+  const { user } = useUser();
 
   if (!context) {
     throw new Error("GenerateForms must be used within a FormProvider");
   }
 
-  const { formData, setFormData, setIsLoading, isLoading } = context;
+  const { setFormData, setIsLoading, isLoading } = context;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setFormData(dataForm);
-    // console.log("Form submitted: ", dataForm);
-
     GenerateAIContent(dataForm);
   };
 
@@ -45,23 +46,46 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
   };
 
   const GenerateAIContent = async (datas: FORMDATA | undefined) => {
-    // const extractedData: { key: string; value: any; }[] = [];
-    // if (datas) {
-    //   Object.entries(datas).forEach(([key, value]) => {
-    //     console.log(`${key}: ${value}`);
-    //     extractedData.push({ key, value });
-    //   });
-    // } else {
-    //   console.log('No data provided');
-    // }
-    // console.log("Extracted: ",extractedData);
     setIsLoading(true);
-    const Prompt  = selectedTemplate.aiPrompt + "\n\n" + JSON.stringify(datas);
-    
-    const result = await chatSession.sendMessage(Prompt);
-    console.log("Result: ", result.response.text());
-    setFormData(result.response.text());
-    setIsLoading(false);
+    const selectedPrompt = selectedTemplate.aiPrompt;
+    const stringData = JSON.stringify(datas);
+    const Prompt = selectedPrompt + "\n\n" + stringData;
+
+    try {
+      const result = await chatSession.sendMessage(Prompt);
+      const aiResponse = await result.response.text();
+      console.log("Result: ", aiResponse);
+      setFormData(aiResponse);
+      await SaveToDB(stringData, selectedTemplate.slug, aiResponse);
+    } catch (error) {
+      console.error("Error generating AI content:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const SaveToDB = async (
+    stringData: string,
+    selectedTemplate: string,
+    AIResult: string
+  ) => {
+    try {
+      const email = user?.primaryEmailAddress?.emailAddress;
+      if (!email) {
+        throw new Error("User email is not defined");
+      }
+
+      const result = await db.insert(AIOutput).values({
+        formdata: stringData,
+        airesponse: AIResult,
+        templateSlug: selectedTemplate,
+        createdBy: email,
+        createdAt: new Date(), 
+      });
+      console.log(result);
+    } catch (error) {
+      console.error("Error saving to DB:", error);
+    }
   };
 
   return (
