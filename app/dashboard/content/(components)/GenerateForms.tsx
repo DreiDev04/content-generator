@@ -10,17 +10,18 @@ import { chatSession } from "@/utils/aimodel";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
+import { useGenerateAIContent } from "@/hooks/useGenerateAIContent";
 
 interface GenerateFormsProps {
   selectedTemplate: TEMPLATE;
 }
 
 export interface FORMDATA {
-  name: string;
+  [key: string]: string;
 }
 
 const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
-  const [dataForm, setDataForm] = useState<FORMDATA>();
+  const [dataForm, setDataForm] = useState<FORMDATA>({});
   const context = useContext(FormContext);
   const { user } = useUser();
 
@@ -30,9 +31,22 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
 
   const { setFormData, setIsLoading, isLoading } = context;
 
+  const { generateContent } = useGenerateAIContent();
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    GenerateAIContent(dataForm);
+    // let mappedData: string[] = [];
+
+    // if (dataForm) { 
+    //   mappedData = Object.entries(dataForm).map(([key, value]) => {
+    //     return `${key}: ${value}`; 
+    //   });
+    // } 
+    
+    // console.log(mappedData);
+    // console.log(dataForm);
+    generateContent(selectedTemplate, dataForm);
+    // GenerateAIContent(dataForm);
   };
 
   const handleOnChange = (
@@ -45,48 +59,48 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
     }));
   };
 
-  const GenerateAIContent = async (datas: FORMDATA | undefined) => {
-    setIsLoading(true);
-    const selectedPrompt = selectedTemplate.aiPrompt;
-    const stringData = JSON.stringify(datas);
-    const Prompt = selectedPrompt + "\n\n" + stringData;
+  // const GenerateAIContent = async (datas: FORMDATA | undefined) => {
+  //   setIsLoading(true);
+  //   const selectedPrompt = selectedTemplate.aiPrompt;
+  //   const stringData = JSON.stringify(datas);
+  //   const Prompt = selectedPrompt + "\n\n" + stringData;
 
-    try {
-      const result = await chatSession.sendMessage(Prompt);
-      const aiResponse = await result.response.text();
-      console.log("Result: ", aiResponse);
-      setFormData(aiResponse);
-      await SaveToDB(stringData, selectedTemplate.slug, aiResponse);
-    } catch (error) {
-      console.error("Error generating AI content:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //   try {
+  //     const result = await chatSession.sendMessage(Prompt);
+  //     const aiResponse = await result.response.text();
+  //     console.log("Result: ", aiResponse);
+  //     setFormData(aiResponse);
+  //     await SaveToDB(stringData, selectedTemplate.slug, aiResponse);
+  //   } catch (error) {
+  //     console.error("Error generating AI content:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  const SaveToDB = async (
-    stringData: string,
-    selectedTemplate: string,
-    AIResult: string
-  ) => {
-    try {
-      const email = user?.primaryEmailAddress?.emailAddress;
-      if (!email) {
-        throw new Error("User email is not defined");
-      }
+  // const SaveToDB = async (
+  //   stringData: string,
+  //   selectedTemplate: string,
+  //   AIResult: string
+  // ) => {
+  //   try {
+  //     const email = user?.primaryEmailAddress?.emailAddress;
+  //     if (!email) {
+  //       throw new Error("User email is not defined");
+  //     }
 
-      const result = await db.insert(AIOutput).values({
-        formdata: stringData,
-        airesponse: AIResult,
-        templateSlug: selectedTemplate,
-        createdBy: email,
-        createdAt: new Date(), 
-      });
-      console.log(result);
-    } catch (error) {
-      console.error("Error saving to DB:", error);
-    }
-  };
+  //     const result = await db.insert(AIOutput).values({
+  //       formdata: stringData,
+  //       airesponse: AIResult,
+  //       templateSlug: selectedTemplate,
+  //       createdBy: email,
+  //       createdAt: new Date(),
+  //     });
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.error("Error saving to DB:", error);
+  //   }
+  // };
 
   return (
     <form onSubmit={onSubmit} className="mt-5">
