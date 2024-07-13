@@ -1,8 +1,7 @@
-import { pgTable, serial, text, varchar, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, timestamp } from "drizzle-orm/pg-core";
 
 export const AIOutput = pgTable('ai_output', {
   //id/createdBy/slug/aiResponse/formdata/date
-
   id: serial("id").primaryKey(),
   createdBy: varchar("created_by").notNull(),
   templateSlug: varchar("template_slug").notNull(),
