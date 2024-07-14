@@ -49,9 +49,9 @@ export const SaveToDatabase = async (
 export const GetHistory = async () => {
   try {
     const response = await fetch("/api/history");
-    if (response.ok) {
-      console.log("Data retrieved successfully");
-    }
+    // if (response.ok) {
+    //   console.log("Data retrieved successfully");
+    // }
     const result = await response.json();
     const formatResult = result.map((item: HistoryProps) => {
       const x = JSON.parse(item.formdata);
@@ -83,3 +83,6 @@ export const GetHistory = async () => {
     console.error("Error getting history:", error);
   }
 };
+
+
+

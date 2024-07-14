@@ -47,7 +47,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
     slug: "blog-content-generation",
     aiPrompt:
-      "Generate Blog Content based on [topic] and [outline] in rich text editor format",
+      "Generate Blog Content based on [topic] and [outline] in rich text editor format.",
     form: [
       {
         label: "Enter your blog topic",
