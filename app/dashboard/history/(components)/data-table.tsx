@@ -130,7 +130,7 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      <div className="line-clamp-3">
+                      <div className="line-clamp-4">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()

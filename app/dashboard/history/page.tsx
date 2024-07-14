@@ -9,7 +9,7 @@ export interface HistoryProps {
   createdAt: string;
   createdBy: string;
   formdata: string;
-  id: number;
+  id?: number;
   templateSlug: string;
 }
 
@@ -19,13 +19,14 @@ const History = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await GetHistory();
+
       if (result) {
+        
         setData(result);
       }
     };
     fetchData();
   }, []);
-  
 
   return (
     <div className="bg-card h-full w-full p-5">
