@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Raleway as FontSans } from "next/font/google";
 import "@/styles/globals.css";
-
+import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -38,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

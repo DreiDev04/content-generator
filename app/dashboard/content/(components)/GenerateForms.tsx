@@ -11,6 +11,19 @@ import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { useGenerateAIContent } from "@/hooks/useGenerateAIContent";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import Link from "next/link";
 
 interface GenerateFormsProps {
   selectedTemplate: TEMPLATE;
@@ -23,7 +36,6 @@ export interface FORMDATA {
 const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
   const [dataForm, setDataForm] = useState<FORMDATA>({});
   const context = useContext(FormContext);
-  const { user } = useUser();
 
   if (!context) {
     throw new Error("GenerateForms must be used within a FormProvider");
@@ -31,22 +43,11 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
 
   const { setFormData, setIsLoading, isLoading } = context;
 
-  const { generateContent } = useGenerateAIContent();
+  const { generateContent, error } = useGenerateAIContent();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // let mappedData: string[] = [];
-
-    // if (dataForm) { 
-    //   mappedData = Object.entries(dataForm).map(([key, value]) => {
-    //     return `${key}: ${value}`; 
-    //   });
-    // } 
-    
-    // console.log(mappedData);
-    // console.log(dataForm);
     generateContent(selectedTemplate, dataForm);
-    // GenerateAIContent(dataForm);
   };
 
   const handleOnChange = (
@@ -59,48 +60,9 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
     }));
   };
 
-  // const GenerateAIContent = async (datas: FORMDATA | undefined) => {
-  //   setIsLoading(true);
-  //   const selectedPrompt = selectedTemplate.aiPrompt;
-  //   const stringData = JSON.stringify(datas);
-  //   const Prompt = selectedPrompt + "\n\n" + stringData;
-
-  //   try {
-  //     const result = await chatSession.sendMessage(Prompt);
-  //     const aiResponse = await result.response.text();
-  //     console.log("Result: ", aiResponse);
-  //     setFormData(aiResponse);
-  //     await SaveToDB(stringData, selectedTemplate.slug, aiResponse);
-  //   } catch (error) {
-  //     console.error("Error generating AI content:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // const SaveToDB = async (
-  //   stringData: string,
-  //   selectedTemplate: string,
-  //   AIResult: string
-  // ) => {
-  //   try {
-  //     const email = user?.primaryEmailAddress?.emailAddress;
-  //     if (!email) {
-  //       throw new Error("User email is not defined");
-  //     }
-
-  //     const result = await db.insert(AIOutput).values({
-  //       formdata: stringData,
-  //       airesponse: AIResult,
-  //       templateSlug: selectedTemplate,
-  //       createdBy: email,
-  //       createdAt: new Date(),
-  //     });
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.error("Error saving to DB:", error);
-  //   }
-  // };
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   return (
     <form onSubmit={onSubmit} className="mt-5">
@@ -132,6 +94,31 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
       <Button type="submit" className="w-full" disabled={!!isLoading}>
         Generate
       </Button>
+      <AlertDialog open={!!error}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Prompt Error</AlertDialogTitle>
+            <AlertDialogDescription>{error?.message}</AlertDialogDescription>
+            <AlertDialogDescription>
+              <span className="text-red-500">
+                Safety filters detected: a potential harmful content in the
+                response. Please try again.
+              </span>
+            </AlertDialogDescription>
+            <AlertDialogDescription>
+              <Link
+                href="https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes"
+                className="underline"
+              >
+                https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes
+              </Link>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={handleReload}>Okay</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </form>
   );
 };

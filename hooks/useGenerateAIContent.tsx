@@ -13,7 +13,7 @@ export const useGenerateAIContent = () => {
   }
   const { setFormData, setIsLoading, isLoading } = context;
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const generateContent = async (
     selectedTemplate: TEMPLATE,
@@ -31,8 +31,13 @@ export const useGenerateAIContent = () => {
       setFormData(aiResponse);
       await SaveToDatabase(data, selectedTemplate, aiResponse);
     } catch (error) {
-      setError("Error generating AI content");
-      console.error("Error generating AI content:", error);
+      if (error instanceof Error) {
+        setError(new Error(`Error generating AI content: ${error.message}`));
+        console.error("Error generating AI content:", error);
+      } else {
+        setError(new Error("An unexpected error occurred"));
+        console.error("Unexpected error:", error);
+      }
     } finally {
       setIsLoading(false);
     }
