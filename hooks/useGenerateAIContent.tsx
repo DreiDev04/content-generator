@@ -24,13 +24,7 @@ export const useGenerateAIContent = () => {
     const selectedPrompt = selectedTemplate.aiPrompt;
     const stringData = JSON.stringify(data);
     const prompt = selectedPrompt + "\n\n" + stringData;
-    let mappedData: string[] = [];
-
-    if (data) {
-      mappedData = Object.entries(data).map(([key, value]) => {
-        return `${key}: ${value}`;
-      });
-    }
+    
     try {
       const promptResult = await chatSession.sendMessage(prompt);
       const aiResponse = await promptResult.response.text();

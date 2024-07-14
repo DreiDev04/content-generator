@@ -36,7 +36,6 @@ const ToastUIEditor = () => {
             if (editorInstance) {
               const markdown = editorInstance.getEditorElements().wwEditor.innerText;
               navigator.clipboard.writeText(markdown);
-              console.log(editorInstance.getEditorElements());
             }
           }
         }>

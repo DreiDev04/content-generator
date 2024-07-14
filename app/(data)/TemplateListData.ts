@@ -17,29 +17,6 @@ export interface TEMPLATE {
 
 
 export default [
-  
-  // {
-  //   name: "Blog Title",
-  //   desc: "An AI tool that generate blog title depends on yout blog information",
-  //   category: "Blog",
-  //   icon: "https://cdn-icons-png.flaticon.com/128/4186/4186534.png",
-  //   aiPrompt:
-  //     "Generate a compelling and precise case study title based on the provided niche and blog outline.",
-  //   slug: "generate-blog-title",
-  //   form: [
-  //     {
-  //       label: "Enter your blog niche",
-  //       field: "input",
-  //       name: "niche",
-  //       required: true,
-  //     },
-  //     {
-  //       label: "Enter blog outline",
-  //       field: "textarea",
-  //       name: "outline",
-  //     },
-  //   ],
-  // },
   {
     name: "Blog Content",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
@@ -47,7 +24,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
     slug: "blog-content-generation",
     aiPrompt:
-      "Generate Blog Content based on [topic] and [outline] in rich text editor format.",
+      "Generate Blog Content based on [topic] and [outline].",
     form: [
       {
         label: "Enter your blog topic",

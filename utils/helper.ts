@@ -1,7 +1,6 @@
 import { TEMPLATE } from "@/app/(data)/TemplateListData";
 import { FORMDATA } from "@/app/dashboard/content/(components)/GenerateForms";
 import { HistoryProps } from "@/app/dashboard/history/page";
-import removeMarkdown from "remove-markdown";
 import { format } from "date-fns";
 
 export const SaveToDatabase = async (
@@ -32,37 +31,14 @@ export const SaveToDatabase = async (
     console.error("Error saving to DB:", error);
   }
 };
-
-// export const GetHistoryPrompt = async (id: string) => {
-//   try {
-//     const response = await fetch(`/api/getHistory?id=${id}`);
-//     if (response.ok) {
-//       console.log("Data retrieved successfully");
-//     }
-//     const result = await response.json();
-//     console.log(result);
-//     return result;
-//   } catch (error) {
-//     console.error("Error getting history:", error);
-//   }
-// }
 export const GetHistory = async () => {
   try {
     const response = await fetch("/api/history");
-    // if (response.ok) {
-    //   console.log("Data retrieved successfully");
-    // }
     const result = await response.json();
     const formatResult = result.map((item: HistoryProps) => {
       const x = JSON.parse(item.formdata);
-      let formattedString = "";
-
-      for (const [key, value] of Object.entries(x)) {
-        formattedString += `${
-          key.charAt(0).toUpperCase() + key.slice(1)
-        }: ${value}\n`;
-      }
-
+      const formattedString = Object.values(x).join(", ")
+      const plainTextResponse = markdownToPlainText(item.aiResponse);
       return {
         templateSlug: item.templateSlug
           .toLowerCase()
@@ -71,13 +47,11 @@ export const GetHistory = async () => {
             return item.charAt(0).toUpperCase() + item.slice(1);
           })
           .join(" "),
-        aiResponse: removeMarkdown(item.aiResponse),
+        aiResponse: plainTextResponse,
         createdAt: format(new Date(item.createdAt), "MM-dd-yyyy"),
         formdata: formattedString,
       };
     });
-    // console.log("Result: ", result);
-    // console.log("Format Result: ", formatResult);
     return formatResult;
   } catch (error) {
     console.error("Error getting history:", error);
@@ -85,4 +59,15 @@ export const GetHistory = async () => {
 };
 
 
-
+const markdownToPlainText = (markdown: string) => {
+  // Remove markdown formatting
+  return markdown
+    .replace(/##+/g, '') // Remove headers
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+    .replace(/\*(.*?)\*/g, '$1') // Remove italics
+    .replace(/\[.*?\]\(.*?\)/g, '') // Remove links
+    .replace(/[-*] /g, '') // Remove bullet points
+    .replace(/\n/g, ' ') // Replace new lines with space
+    .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+    .trim(); // Trim leading/trailing whitespace
+};

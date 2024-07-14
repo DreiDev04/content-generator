@@ -87,7 +87,7 @@ export const columns: ColumnDef<HistoryProps>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const data = row.original;
 
       return (
         <DropdownMenu>
@@ -100,9 +100,9 @@ export const columns: ColumnDef<HistoryProps>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-            // onClick={() => navigator.clipboard.writeText(payment.id)}
+            onClick={() => navigator.clipboard.writeText(data.aiResponse)}
             >
-              Copy payment ID
+              Copy Response
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
