@@ -16,7 +16,7 @@ export default function DashboardLayout({
       <div className="md:w-5/6 w-full">
         <Header />
         {children}
-        <ModeToggle />
+        {/* <ModeToggle /> */}
       </div>
     </div>
   );
