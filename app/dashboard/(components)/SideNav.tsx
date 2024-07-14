@@ -33,12 +33,13 @@ const SideNav = () => {
 
   return (
     <aside className="h-full shadow-sm p-5 flex flex-col">
-      <div className="flex justify-center border-b">
+      <div className="flex justify-center border-b  h-11">
         <Image
           src="/logoipsum.svg"
           alt="logo"
           width={150}
           height={150}
+          className="text-foreground"
         />
       </div>
       <div className="flex flex-col gap-4 mt-10">

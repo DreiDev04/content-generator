@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { columns } from "./(components)/columns";
 import { DataTable } from "./(components)/data-table";
 import { GetHistory } from "@/utils/helper";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface HistoryProps {
   aiResponse: string;
@@ -21,7 +22,6 @@ const History = () => {
       const result = await GetHistory();
 
       if (result) {
-        
         setData(result);
       }
     };
@@ -33,11 +33,12 @@ const History = () => {
       <div className="bg-background rounded-lg p-5 flex flex-col gap-5">
         <div>
           <h1 className="font-extrabold text-2xl">History</h1>
-          <p className="text-gray-500 font-serif">
-            View previously generated AI content. Note tha the AI Respnse will lose its markdown formatting.
-          </p>
+          <div className="text-gray-500 font-serif">
+            View previously generated AI content. Note tha the AI Respnse will
+            lose its markdown formatting.
+          </div>
         </div>
-        <div>
+        <div className="text-foreground ">
           {data.length > 0 && <DataTable columns={columns} data={data} />}
         </div>
       </div>

@@ -24,7 +24,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
     slug: "blog-content-generation",
     aiPrompt:
-      "Generate Blog Content based on [topic] and [outline].",
+      "Generate a heartwarming and wholesome blog post based on the topic [topic] and the outline [outline] The content should be positive, engaging, and suitable for all audiences. Avoid any hate speech or sexually explicit content. The blog should be inviting and captivating, encouraging readers to engage with it from the first glance. If it include hate speech and sexually explicit content make it wholesome and positive.",
     form: [
       {
         label: "Enter your blog topic",
