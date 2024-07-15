@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/table";
 import * as React from "react";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,9 +67,12 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
+        {/* {data.length === 0 && <Skeleton className="w-[100px] h-[20px] rounded-full" />} */}
         <Input
           placeholder="Filter Form Data..."
-          value={(table.getColumn("formdata")?.getFilterValue() as string) ?? ""}
+          value={
+            (table.getColumn("formdata")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
             table.getColumn("formdata")?.setFilterValue(event.target.value)
           }

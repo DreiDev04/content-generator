@@ -39,7 +39,7 @@ const History = () => {
           </div>
         </div>
         <div className="text-foreground ">
-          {data.length > 0 && <DataTable columns={columns} data={data} />}
+          { <DataTable columns={columns} data={data}/>}
         </div>
       </div>
     </div>

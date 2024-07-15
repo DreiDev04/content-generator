@@ -17,16 +17,16 @@ const SideNav = () => {
       path: "/dashboard/history",
       icon: History,
     },
-    {
-      name: "Billing",
-      path: "/dashboard/billings",
-      icon: Receipt,
-    },
-    {
-      name: "Settings",
-      path: "/dashboard/settings",
-      icon: Settings,
-    },
+    // {
+    //   name: "Billing",
+    //   path: "/dashboard/billings",
+    //   icon: Receipt,
+    // },
+    // {
+    //   name: "Settings",
+    //   path: "/dashboard/settings",
+    //   icon: Settings,
+    // },
   ];
 
   const path = usePathname();
