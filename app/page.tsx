@@ -38,22 +38,10 @@ export default function Home() {
                 className="text-background dark:text-foreground hover:text-foreground hover:underline"
                 asChild
               >
-                <Link
-                  href={
-                    "sign-in"
-                  }
-                >
-                  Login
-                </Link>
+                <Link href={"sign-in"}>Login</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link
-                  href={
-                    "sign-up"
-                  }
-                >
-                  Sign up
-                </Link>
+                <Link href={"sign-up"}>Sign up</Link>
               </Button>
             </div>
           )}
@@ -95,6 +83,7 @@ export default function Home() {
             </h2>
             <div className="mt-8 border ">
               <Image
+                unoptimized
                 src="/content/A-idea.gif"
                 alt="idea"
                 width={900}
