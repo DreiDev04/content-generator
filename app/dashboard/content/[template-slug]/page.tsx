@@ -7,7 +7,6 @@ import { AlertCircleIcon, ArrowLeftIcon, Terminal, XIcon } from "lucide-react";
 import FormSection from "../(components)/FormSection";
 import OutputSection from "../(components)/OutputSection";
 import { FormProvider } from "@/components/context/FormContext";
-import ToastUIEditor from "../(components)/ToastUIEditor";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface PROPS {
