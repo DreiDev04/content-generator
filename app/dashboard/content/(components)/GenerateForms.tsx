@@ -80,6 +80,7 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
               name={item.name}
               required={item?.required}
               onChange={handleOnChange}
+              autoComplete="off"
             />
           ) : item.field === "textarea" ? (
             <Textarea

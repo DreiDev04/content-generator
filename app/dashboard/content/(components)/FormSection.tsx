@@ -9,7 +9,7 @@ interface FormProps {
 
 const FormSection = ({ selectedTemplate }: FormProps) => {
   return (
-    <div className="border flex flex-col p-5 rounded-sm shadow-lg bg-background gap-3">
+    <div className="border flex flex-col p-5 rounded-sm shadow-md bg-card gap-3">
       <Image
         src={selectedTemplate?.icon}
         alt={selectedTemplate?.name}

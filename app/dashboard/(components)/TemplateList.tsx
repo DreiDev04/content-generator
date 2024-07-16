@@ -9,7 +9,7 @@ const TemplateList = ({ search }: any) => {
   const [templateDataList, setTemplateDataList] = useState<TEMPLATE[]>([]);
 
   useEffect(() => {
-    console.log(search);
+    // console.log(search);
     if (search) {
       const filteredData = TemplateListData.filter((template: TEMPLATE) => {
         return template.name.toLowerCase().includes(search.toLowerCase());

@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   return (
     <main>
-      <section className="gradient_bg flex flex-col p-10 justify-center align-middle items-center gap-3 bg-card-foreground">
+      <section className="gradient_bg flex flex-col p-10 justify-center align-middle items-center gap-3 bg-background">
         <h1 className="text-4xl font-bold text-white justify-center text-center">
           Browse All Template
         </h1>
@@ -27,7 +27,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className="p-10 bg-card">
+      <section className="p-10 bg-background">
         <TemplateList search={search} />
       </section>
     </main>

@@ -29,7 +29,7 @@ const History = () => {
   }, []);
 
   return (
-    <div className="bg-card h-full w-full p-5">
+    <div className="bg-card w-full p-5">
       <div className="bg-background rounded-lg p-5 flex flex-col gap-5">
         <div>
           <h1 className="font-extrabold text-2xl">History</h1>

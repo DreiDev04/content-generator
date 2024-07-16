@@ -24,6 +24,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/a-idea-logo/svg/a-idea-favicon-black.svg" type="image/svg" />
+      </head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
@@ -31,6 +34,7 @@ export default function RootLayout({
           )}
           suppressHydrationWarning
         >
+
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
