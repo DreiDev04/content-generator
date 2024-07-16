@@ -27,7 +27,7 @@ const CreateContent = ({ params }: PROPS) => {
   };
 
   return (
-    <div className="bg-background p-5 flex flex-col gap-2">
+    <div className="bg-background p-5 flex flex-col gap-2 mb-10">
       <div className=" ">
         <Button asChild className="m-2">
           <Link href="/dashboard" className="flex gap-2">
@@ -61,13 +61,14 @@ const CreateContent = ({ params }: PROPS) => {
         </div>
       </Alert>
       <FormProvider>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 h-screen ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="col-span-1">
             <FormSection selectedTemplate={selectedTemplate} />
           </div>
           <div className="col-span-2 h-full flex rounded-lg">
-            <div className="w-full h-screen rounded-sm bg-white border">
-              <ToastUIEditor />
+            <div className="w-full rounded-sm bg-white border">
+              {/* <ToastUIEditor /> */}
+              <OutputSection />
             </div>
           </div>
         </div>
