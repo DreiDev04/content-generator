@@ -67,9 +67,9 @@ export default function Home() {
           <div>
             <Button
               asChild
-              className="text-background "
+              className="text-background dark:text-white"
             >
-              <Link href="/dashboard">Get Started</Link>
+              <Link href="/dashboard" >Get Started</Link>
             </Button>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="mt-8 border ">
               <Image
                 unoptimized
-                src="/content/A-idea.gif"
+                src="/content/AIdea.gif"
                 alt="idea"
                 width={900}
                 height={500}
