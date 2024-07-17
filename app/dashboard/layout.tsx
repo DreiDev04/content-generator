@@ -10,10 +10,10 @@ export default function DashboardLayout({
 }>) {
   return (
     <div className="flex w-full h-screen">
-      <div className="md:w-1/6 hidden md:block">
+      <div className="lg:w-1/6 hidden lg:block">
         <SideNav />
       </div>
-      <div className="md:w-5/6 w-full">
+      <div className="lg:w-5/6 w-full">
         <Header />
         {children}
         {/* <ModeToggle /> */}

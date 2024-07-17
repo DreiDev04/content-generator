@@ -23,7 +23,7 @@ const Header = () => {
         <div>
           <Button
             variant={"ghost"}
-            className="md:hidden block"
+            className="lg:hidden block"
             onClick={handleDrop}
           >
             <Menu />
@@ -49,7 +49,7 @@ const Header = () => {
 
       {isDrop && (
         <>
-          <div className="md:hidden flex flex-col my-4 gap-2">
+          <div className="lg:hidden flex flex-col my-4 gap-2">
             <div className=" flex justify-center items-center ">
               <Link href="/">
                 <Image

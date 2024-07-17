@@ -1,9 +1,9 @@
 "use client";
-import { History, Home, Receipt, Settings } from "lucide-react";
+import { History, Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
@@ -18,16 +18,6 @@ export const MenuList = [
     path: "/dashboard/history",
     icon: History,
   },
-  // {
-  //   name: "Billing",
-  //   path: "/dashboard/billings",
-  //   icon: Receipt,
-  // },
-  // {
-  //   name: "Settings",
-  //   path: "/dashboard/settings",
-  //   icon: Settings,
-  // },
 ];
 
 const SideNav = () => {
@@ -35,7 +25,7 @@ const SideNav = () => {
   const { theme } = useTheme();
 
   return (
-    <aside className="h-full shadow-sm p-5 flex flex-col fixed bg-background">
+    <aside className="h-full shadow-sm p-5 flex flex-col fixed w-1/6 bg-background border">
       <div className="flex justify-center h-11">
         <Button variant={"link"} asChild>
           <Link href="/">
@@ -43,9 +33,7 @@ const SideNav = () => {
               src={
                 theme === "light"
                   ? "/a-idea-logo/svg/logo-no-background.svg"
-                  : theme === "dark"
-                  ? "/a-idea-logo/svg/logo-no-background-white.svg"
-                  : "/a-idea-logo/svg/logo-no-background.svg"
+                  : "/a-idea-logo/svg/logo-no-background-white.svg"
               }
               alt="logo"
               width={150}

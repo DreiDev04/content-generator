@@ -60,8 +60,8 @@ const CreateContent = ({ params }: PROPS) => {
         </div>
       </Alert>
       <FormProvider>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 ">
+          <div className="col-span-1 mb-10">
             <FormSection selectedTemplate={selectedTemplate} />
           </div>
           <div className="col-span-2 h-full flex rounded-lg">
