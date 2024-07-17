@@ -35,7 +35,7 @@ export default function Home() {
             <div className="flex gap-3">
               <Button
                 variant="default"
-                className="text-background dark:text-foreground hover:text-foreground hover:underline"
+                className="text-background dark:text-foreground"
                 asChild
               >
                 <Link href={"sign-in"}>Login</Link>
@@ -67,7 +67,7 @@ export default function Home() {
           <div>
             <Button
               asChild
-              className="text-background dark:text-foreground hover:text-foreground hover:underline"
+              className="text-background "
             >
               <Link href="/dashboard">Get Started</Link>
             </Button>
@@ -95,15 +95,15 @@ export default function Home() {
       </section>
 
       <section className="bg-background">
-        <div className="container mx-auto px-6 py-16">
+        <div className="container mx-auto px-6 py-16 ">
           <h2 className="text-3xl font-bold text-foreground text-center">
             Features
           </h2>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-card p-6 rounded shadow flex flex-col gap-3"
+                className="bg-card p-6 rounded flex flex-col gap-3 shadow-lg border"
               >
                 <Image
                   src={feature.icon}
