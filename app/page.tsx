@@ -15,7 +15,7 @@ export default function Home() {
       <header className="border-b flex justify-between md:px-20 px-3 py-5">
         <div>
           <Link href="/dashboard">
-          <Image
+            <Image
               src={
                 theme === "dark"
                   ? "/a-idea-logo/svg/logo-no-background-white.svg"
@@ -52,7 +52,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-background">
         <div className="container mx-auto px-6 py-24 text-center  flex flex-col gap-4">
-          <h1 className="md:text-5xl text-3xl font-bold text-foreground ">
+          <h1 className="md:text-5xl text-3xl font-bold text-foreground">
             Welcome to A-Idea
           </h1>
           <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
@@ -62,11 +62,8 @@ export default function Home() {
             started.
           </p>
           <div>
-            <Button
-              asChild
-              className="text-background dark:text-white"
-            >
-              <Link href="/dashboard" >Get Started</Link>
+            <Button asChild className="text-background dark:text-white">
+              <Link href="/dashboard">Get Started</Link>
             </Button>
           </div>
         </div>

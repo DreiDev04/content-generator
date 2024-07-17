@@ -14,6 +14,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "A-Idea",
   description: "A-Idea is a tool to generate ideas for your content.",
+  
 };
 
 export default function RootLayout({

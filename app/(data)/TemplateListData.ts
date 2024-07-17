@@ -15,8 +15,65 @@ export interface TEMPLATE {
   form: FORM[];
 }
 
-
 export default [
+  {
+    name: "Presentation Outline",
+    desc: " An AI tool that generates a professional presentation outline for your business, project, or research. The outline includes a title, introduction, body, and conclusion.",
+    category: "presentation",
+    icon: "https://cdn-icons-png.flaticon.com/128/1903/1903259.png",
+    slug: "presentation-outline",
+    aiPrompt:
+      "Develop an outline for a presentation about the [topic]. The presentation should include an introduction, body, and conclusion. The introduction should provide an overview of the topic, the body should include [keyPoints] and supporting details, and the conclusion should summarize the main ideas and provide a call to action.",
+    form: [
+      {
+        label: "Enter Topic",
+        field: "input",
+        name: "topic",
+        required: true,
+      },
+      {
+        label: "Enter Key Points",
+        field: "textarea",
+        name: "keyPoints",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Cover Letter Generator",
+    desc: "An AI tool that generates a professional cover letter for your job application, tailored to the job description and your qualifications.",
+    category: "job",
+    icon: "https://cdn-icons-png.flaticon.com/128/3850/3850285.png",
+    slug: "cover-letter-generator",
+    aiPrompt:
+      "Generate a professional cover letter for the job position of [jobTitle] at [companyName]. The cover letter should be tailored to the [jobDescription] and highlight [qualifications]. Avoid any grammatical errors and ensure the cover letter is engaging and professional.",
+    form: [
+      {
+        label: "Enter Job Title",
+        field: "input",
+        name: "jobTitle",
+        required: true,
+      },
+      {
+        label: "Enter The Company Name",
+        field: "input",
+        name: "companyName",
+        required: true,
+      },
+      {
+        label: "Enter the Job Description",
+        field: "textarea",
+        name: "jobDescription",
+        required: true,
+      },
+      {
+        label: "Enter your Qualifications",
+        field: "textarea",
+        name: "qualifications",
+        required: true,
+      },
+    ],
+  },
   {
     name: "Blog Content",
     desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
@@ -46,7 +103,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/11497/11497847.png",
     slug: "blog-topic-idea",
     aiPrompt:
-      "Generate top 5 Blog Topic Ideas in bullet point only, (no Description) based on niche in rich text editor format",
+      "Generate top 10 Blog Topic Ideas in bullet point only, (no Description) based on [niche] in rich text editor format",
     form: [
       {
         label: "Enter your Niche",
@@ -63,7 +120,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/402/402075.png",
     slug: "youtube-seo-title",
     aiPrompt:
-      "Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format",
+      "Give me Best SEO optimized high ranked 10 title ideas bullet wise only bases on [keywords] and [outline] and give me result in HTML tags format",
     form: [
       {
         label: "Enter your youtube video topic keyowords",
@@ -85,7 +142,7 @@ export default [
     icon: "https://cdn-icons-png.flaticon.com/128/2111/2111748.png",
     slug: "youtube-description",
     aiPrompt:
-      "Generate Youtube description with emoji under 4-5 lines based on topic and outline in rich text editor format",
+      "Generate Youtube description under 4-5 lines based on [topic] and [outline] in rich text editor format",
     form: [
       {
         label: "Enter your blog topic/title",
@@ -108,7 +165,7 @@ export default [
     slug: "youtube-tag",
 
     aiPrompt:
-      "Generate 10 Youtube tags in bullet point based on title and outline in rich text editor format",
+      "Generate 10 Youtube tags in bullet point based on [title] and [outline] in rich text editor format",
 
     form: [
       {
@@ -135,8 +192,7 @@ export default [
       "Rewrite give article without any Plagiarism in rich text editor format",
     form: [
       {
-        label:
-          "ðŸ¤– Provide your Article/Blogpost or any other content to rewrite.",
+        label: "Provide your Article/Blogpost or any other content to rewrite.",
         field: "textarea",
         name: "article",
         required: true,
@@ -144,7 +200,7 @@ export default [
     ],
   },
   {
-    name: "Text Improver",
+    name: "Text Improve",
     desc: "This handy tool refines your writing, eliminating errors and redundancies for a clear, readable result. It also offers a comprehensive tone analysis and suggests better word choices.",
     icon: "https://cdn-icons-png.flaticon.com/128/1686/1686815.png",
     category: "Writing Assistant",
@@ -221,7 +277,7 @@ export default [
 
     slug: "instagram-post-idea-generator",
     aiPrompt:
-      "Generate 5-10 Instagram idea depends on niche with latest trend and give output in  in rich text editor format",
+      "Generate 10 Instagram idea depends on niche with latest trend and give output in  in rich text editor format",
     form: [
       {
         label: "Enter Keywords / Niche for your instagram idea",
@@ -239,7 +295,7 @@ export default [
 
     slug: "english-grammer-checker",
     aiPrompt:
-      "Rewrite the inputText by correcting the grammer and give output in  in rich text editor format",
+      "Rewrite the [inputText] by correcting the grammer and give output in  in rich text editor format",
     form: [
       {
         label: "Enter text to correct the grammer",
@@ -257,10 +313,16 @@ export default [
 
     slug: "write-code",
     aiPrompt:
-      "Depends on user codeDescription write a code and give output in  in rich text editor format in code block ",
+      "Depends on user [codeDescription] write a code in [ProgrammingLanguage] then give output in  in rich text editor format in code block ",
     form: [
       {
-        label: "Enter description of code you want along with Programming Lang",
+        label: "Programming Language",
+        field: "textarea",
+        name: "ProgrammingLanguage",
+        required: true,
+      },
+      {
+        label: "Enter description of code you want to write",
         field: "textarea",
         name: "codeDesscripton",
         required: true,
@@ -275,7 +337,7 @@ export default [
 
     slug: "explain-code",
     aiPrompt:
-      "Depends on user codeDescription explain code line by line and give output in  in rich text editor format in code block ",
+      "Depends on user [codeDescription]  explain code line by line and give output in  in rich text editor format in code block ",
     form: [
       {
         label: "Enter code which you want to understand",
@@ -293,7 +355,7 @@ export default [
 
     slug: "code-bug-detector",
     aiPrompt:
-      "Depends on user codeInput find bug in code and give solution and give output in  in rich text editor format in code block ",
+      "Depends on user [codeInput] find bug in code and give solution and give output in  in rich text editor format in code block ",
     form: [
       {
         label: "Enter code which you want to test bug",
@@ -311,7 +373,7 @@ export default [
 
     slug: "tagline-generator",
     aiPrompt:
-      "Depends on user productName and outline generate catchy 5-10 tagline for the business product and give output  in rich text editor format ",
+      "Depends on user [productName] and [outline] generate catchy 5-10 tagline for the business product and give output  in rich text editor format ",
     form: [
       {
         label: "Product/Brand Name",
@@ -335,7 +397,7 @@ export default [
 
     slug: "product-description",
     aiPrompt:
-      "Depends on user productName and description generate small description for product for e-commer business give output  in rich text editor format  ",
+      "Depends on user [productName] and [description] generate description for product for e-commer business give output in rich text editor format  ",
     form: [
       {
         label: "Product Name",
@@ -352,3 +414,59 @@ export default [
     ],
   },
 ];
+
+// {
+//   name: "",
+//   desc: "",
+//   category: "",
+//   icon: "",
+//   slug: "",
+//   aiPrompt:
+//     "",
+//   form: [
+//     {
+//       label: "Enter Topic",
+//       field: "input",
+//       name: "topic",
+//       required: true,
+//     },
+//     {
+//       label: "Enter Key Points",
+//       field: "textarea",
+//       name: "keyPoints",
+//       required: true,
+//     },
+//   ],
+// },
+
+// DRAFTS
+// {
+//   name: "Sales Letter Generator",
+//   desc: " An AI tool that generates a professional sales letter for your business, project, or research. The letter includes a title, introduction, body, and conclusion.",
+//   category: "sales",
+//   icon: "https://cdn-icons-png.flaticon.com/128/3211/3211596.png",
+//   slug: "sales-letter-generator",
+//   aiPrompt:
+//     // " Develop a sales letter for the [product] that highlights its features, benefits, and value proposition. The letter should include an attention-grabbing title, an engaging introduction, a persuasive body, and a compelling call to action. The tone should be professional and persuasive, and the content should be tailored to the [description] and for the [targetAudience].",
+//     "Write a sales letter about [topic] for [targetAudience].",
+//   form: [
+//     {
+//       label: "Enter Topic",
+//       field: "input",
+//       name: "topic",
+//       required: true,
+//     },
+//     // {
+//     //   label: "Enter Product Description",
+//     //   field: "textarea",
+//     //   name: "description",
+//     //   required: true,
+//     // },
+//     {
+//       label: "Enter Target Audience",
+//       field: "input",
+//       name: "targetAudience",
+//       required: true,
+//     },
+//   ],
+// },
