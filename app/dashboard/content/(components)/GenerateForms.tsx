@@ -92,7 +92,7 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
           ) : null}
         </div>
       ))}
-      <Button type="submit" className="w-full" disabled={!!isLoading}>
+      <Button type="submit" className="w-full dark:text-foreground" disabled={!!isLoading}>
         Generate
       </Button>
       <AlertDialog open={!!error}>
@@ -116,7 +116,7 @@ const GenerateForms = ({ selectedTemplate }: GenerateFormsProps) => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={handleReload}>Okay</AlertDialogAction>
+            <AlertDialogAction onClick={handleReload} className="dark:text-foreground">Okay</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

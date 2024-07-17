@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div>
-      <header className="border flex justify-between md:px-20 px-5 py-5">
+      <header className="border-b flex justify-between md:px-20 px-5 py-5">
         <div>
           <Link href="/dashboard">
             <Image

@@ -29,7 +29,7 @@ const CreateContent = ({ params }: PROPS) => {
     <div className="bg-background p-5 flex flex-col gap-2 mb-10">
       <div className=" ">
         <Button asChild className="m-2">
-          <Link href="/dashboard" className="flex gap-2">
+          <Link href="/dashboard" className="flex gap-2 dark:text-foreground">
             <ArrowLeftIcon />
             Back
           </Link>

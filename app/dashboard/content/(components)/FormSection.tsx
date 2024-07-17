@@ -16,7 +16,7 @@ const FormSection = ({ selectedTemplate }: FormProps) => {
         width={50}
         height={50}
       />
-      <h1 className="font-bold text-primary text-lg">
+      <h1 className="font-bold text-primary text-lg dark:text-white">
         {selectedTemplate?.name}
       </h1>
       <p className="text-gray-500">{selectedTemplate?.desc}</p>

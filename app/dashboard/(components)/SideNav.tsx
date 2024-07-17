@@ -25,7 +25,7 @@ const SideNav = () => {
   const { theme } = useTheme();
 
   return (
-    <aside className="h-full shadow-sm p-5 flex flex-col fixed w-1/6 bg-background border">
+    <aside className="h-full shadow-sm p-5 flex flex-col fixed w-1/6 bg-background ">
       <div className="flex justify-center h-11">
         <Button variant={"link"} asChild>
           <Link href="/">

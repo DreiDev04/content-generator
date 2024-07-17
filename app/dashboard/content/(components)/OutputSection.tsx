@@ -29,7 +29,7 @@ function OutputSection() {
           <h2 className="text-xl font-bold text-primary ml-2">Result</h2>
         </div>
         <Button
-          className="m-2 flex gap-2"
+          className="m-2 flex gap-2 dark:text-foreground"
           onClick={() => {
             navigator.clipboard.writeText(formData?.toString() ?? "");
           }}
