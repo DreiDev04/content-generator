@@ -12,27 +12,24 @@ export default function Home() {
 
   return (
     <div>
-      <header className="border-b flex justify-between md:px-20 px-5 py-5">
+      <header className="border-b flex justify-between md:px-20 px-3 py-5">
         <div>
           <Link href="/dashboard">
-            <Image
+          <Image
               src={
-                theme === "light"
-                  ? "/a-idea-logo/svg/logo-no-background.svg"
-                  : theme === "dark"
+                theme === "dark"
                   ? "/a-idea-logo/svg/logo-no-background-white.svg"
-                  : "/a-idea-logo/svg/logo-no-background-white.svg"
+                  : "/a-idea-logo/svg/logo-no-background.svg"
               }
               alt="logo"
               width={150}
               height={150}
-              className=""
             />
           </Link>
         </div>
         <div className="flex md:gap-4 gap-2">
           {!isSignedIn && (
-            <div className="flex gap-3">
+            <div className="flex md:gap-3 gap-1">
               <Button
                 variant="default"
                 className="text-background dark:text-foreground"

@@ -29,16 +29,15 @@ const SideNav = () => {
       <div className="flex justify-center h-11">
         <Button variant={"link"} asChild>
           <Link href="/">
-            <Image
+          <Image
               src={
-                theme === "light"
-                  ? "/a-idea-logo/svg/logo-no-background.svg"
-                  : "/a-idea-logo/svg/logo-no-background-white.svg"
+                theme === "dark"
+                  ? "/a-idea-logo/svg/logo-no-background-white.svg"
+                  : "/a-idea-logo/svg/logo-no-background.svg"
               }
               alt="logo"
               width={150}
               height={150}
-              className=""
             />
           </Link>
         </Button>
